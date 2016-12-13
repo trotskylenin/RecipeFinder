@@ -1,0 +1,23 @@
+<% if @recipe == [] || @recipe.nil? %>
+<p>No recipes for that... Sorry.</p>
+<% else %>
+<h1>Detalles de receta para <%= @recipe['title']%></h1>
+<center><table border='1'>
+  <tr>
+    <th>Creada por</th>
+    <th>Ingredientes</th>
+    <th>Instrucciones</th>
+  </tr>
+  <tr class="odd">
+    <td><center><%= sanitize @recipe["publisher"] %></center></td>
+    <td>
+      <ul type = circle>
+      <% @recipe["ingredients"].each do |i| %>
+        <li><%=sanitize i%></li>
+      <% end %>
+      </ul>
+    </td>
+    <td><center><%= link_to "LEER", @recipe["f2f_url"]%></center></td>
+  </tr>
+</table></center>
+<% end %>

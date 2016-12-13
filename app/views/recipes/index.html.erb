@@ -1,2 +1,20 @@
-<h1>Recipes#index</h1>
-<p>Find me in app/views/recipes/index.html.erb</p>
+<h1>Recetas para <%= @term %></h1>
+
+<% if @recipes.nil? || @recipes == [] %>
+<p>No recipes for that... Sorry.</p>
+<% else %>
+<center><table border='1'>
+  <tr>
+    <th>Image</th>
+    <th>Title</th>
+    <th>Social rank</th>
+  </tr>
+  <% @recipes.each do |r| %>
+  <tr class="<%= cycle("odd", "even")%>">
+    <td><%= link_to image_tag(r["image_url"], {size: "100x100"}), controller: "recipes", action: "recipe", getr: r["recipe_id"] %></td>
+    <td><%= link_to sanitize(r["title"]), r["f2f_url"]%></td>
+    <td><%= r["social_rank"]%></td>
+  </tr>
+  <% end %>
+</table></center>
+<% end %>
